@@ -1,0 +1,97 @@
+.configuration .groupTitle {
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #e09338;
+}
+.configuration .leftWrapper {
+    width: 100%;
+    margin: 0 0 10px 10px;
+}
+.configuration .rightWrapper {
+    width: 100%;
+    margin: 0 0 10px 10px;
+}
+.configuration .mixer {
+    float: left;
+    margin-bottom: 20px;
+}
+.configuration .mixerPreview {
+    padding-right: 20px;
+    float: right;
+    width: 300px;
+    height: 200px;
+}
+.configuration select {
+    height: 22px;
+    border: 1px solid silver;
+}
+.configuration input[type="tel"] {
+    width: 60px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid silver;
+    margin: 2px;
+    padding: 2px;
+}
+.configuration dl {} .configuration dt {
+    float: left;
+    width: 100px;
+    height: 27px;
+    line-height: 24px;
+}
+.configuration dd {
+    margin-left: 100px;
+    height: 27px;
+}
+.configuration dd input[type="checkbox"] {
+    position: relative;
+    top: 3px;
+    margin-left: 30px;
+}
+.configuration .pid_rates {
+    border-collapse: collapse;
+}
+.configuration .pid_rates tr {
+    height: 25px;
+}
+.configuration .pid_rates th {
+    width: 60px;
+    padding-right: 5px;
+    text-align: center;
+}
+.configuration .pid_rates td {} .configuration .pid_rates input {
+    width: 60px;
+}
+.configuration .pid_rates .name {
+    width: 40px;
+}
+.configuration .aux_settings dt {
+    width: 60px;
+}
+.configuration .aux_settings dd {
+    margin-left: 60px;
+}
+.configuration .save {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+    padding: 0 10px 0 10px;
+    height: 20px;
+    line-height: 20px;
+    background-color: #339933;
+}
+.configuration .saveAct {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+    padding: 0 10px 0 10px;
+    height: 20px;
+    line-height: 20px;
+    background-color: #830a0a;
+}
+.configuration .save:hover {
+    background-color: #d01414;
+}

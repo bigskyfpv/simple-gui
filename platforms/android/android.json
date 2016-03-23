@@ -1,0 +1,51 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Serial\"><param name=\"android-package\" value=\"fr.drangies.cordova.serial.Serial\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "fr.drangies.cordova.serial": {
+            "PACKAGE_NAME": "org.anuta.kiss"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "org.anuta.kiss"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "file": "plugins/fr.drangies.cordova.serial/www/serial.js",
+            "id": "fr.drangies.cordova.serial.Serial",
+            "clobbers": [
+                "window.serial"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-whitelist/whitelist.js",
+            "id": "cordova-plugin-whitelist.whitelist",
+            "runs": true
+        }
+    ],
+    "plugin_metadata": {
+        "fr.drangies.cordova.serial": "0.0.7",
+        "cordova-plugin-whitelist": "1.2.1"
+    }
+}
