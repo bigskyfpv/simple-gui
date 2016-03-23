@@ -31,12 +31,14 @@ var app = {
     },
 
     receivedEvent: function(id) {
-        var errorCallback =
             serial.requestPermission({
                 vid: '0483',
                 pid: '5740'
             }, function(successMessage) {}, function(message) {
-                alert(message);
+               // Fallback to default serial ports
+               serial.requestPermission(function(successMessage) {}, function(message) {
+                   alert(message);
+               });
             });
     }
 };
