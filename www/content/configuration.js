@@ -310,9 +310,9 @@ CONTENT.configuration.initialize = function(callback) {
         $('input[name="LVP3"]').val(data['voltgePercent3']);
 
         if (data['BatteryInfluence'] || data['CustomTPAInfluence']) {
-            document.getElementById('AC').style.visibility = "visible";
-            document.getElementById('SAC').style.display = "none";
-            document.body.style.overflow = "scroll";
+            $('#AC').show();
+            $('#SAC').hide();
+            //document.body.style.overflow = "scroll";
         }
 
         function grabData() {

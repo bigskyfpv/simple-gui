@@ -24,6 +24,16 @@ var serial_driver = {
     transmitting: false,
     outputBuffer: [],
 
+    request_permissions: function(success, error) {
+        serial.requestPermission({
+            vid: '0483',
+            pid: '5740'
+        }, success, function(message) {
+            // Fallback to default serial ports
+            serial.requestPermission(success, error);
+        });
+    },
+
     connect: function(path, options, callback) {
         var self = this;
 
@@ -44,72 +54,81 @@ var serial_driver = {
             sleepOnPause: true
         }
 
-        // Android
-        serial.open(opts, function success(message) {
-            console.log("Success: " + message);
-            if (!request.canceled) {
-                self.connectionId = 1;
-                self.bitrate = opts.bitrate;
-                self.bytesReceived = 0;
-                self.bytesSent = 0;
-                self.failed = 0;
-                request.fulfilled = true;
+        self.request_permissions(
+            function success(message) {
+                serial.open(opts, function success(message) {
+                    console.log("Success: " + message);
+                    if (!request.canceled) {
+                        self.connectionId = 1;
+                        self.bitrate = opts.bitrate;
+                        self.bytesReceived = 0;
+                        self.bytesSent = 0;
+                        self.failed = 0;
+                        request.fulfilled = true;
 
-                self.onReceive.addListener(function logBytesReceived(info) {
-                    self.bytesReceived += info.data.byteLength;
-                    console.log("logBytesReceived " + info.data.byteLength);
-                });
+                        self.onReceive.addListener(function logBytesReceived(info) {
+                            self.bytesReceived += info.data.byteLength;
+                            console.log("logBytesReceived " + info.data.byteLength);
+                        });
 
-                self.onReceiveError.addListener(function watchForOnReceiveErrors(info) {
-                    console.error(info);
-                });
+                        self.onReceiveError.addListener(function watchForOnReceiveErrors(info) {
+                            console.error(info);
+                        });
 
-                serial.registerReadCallback(
-                    function success(data) {
-                        var info = {
+                        serial.registerReadCallback(
+                            function success(data) {
+                                var info = {
+                                    connectionId: 1,
+                                    data: data
+                                };
+                                self.onReceive.receiveData(info);
+                            },
+                            function error() {
+                                new Error("Failed to register read callback");
+                            });
+
+
+
+                        var connectionInfo = {
                             connectionId: 1,
-                            data: data
-                        };
-                        self.onReceive.receiveData(info);
-                    },
-                    function error() {
-                        new Error("Failed to register read callback");
-                    });
+                            bitrate: opts.baudrate
+                        }
+                        console.log('SERIAL: Connection opened with ID: ' + connectionInfo.connectionId + ', Baud: ' + connectionInfo.bitrate);
 
+                        if (request.callback) request.callback(connectionInfo);
+                    } else if (connectionInfo && request.canceled) {
+                        // connection opened, but this connect sequence was canceled
+                        // we will disconnect without triggering any callbacks
+                        console.log('SERIAL: Connection opened with ID: ' + connectionInfo.connectionId + ', but request was canceled, disconnecting');
 
-
-                var connectionInfo = {
-                    connectionId: 1,
-                    bitrate: opts.baudrate
-                }
-                console.log('SERIAL: Connection opened with ID: ' + connectionInfo.connectionId + ', Baud: ' + connectionInfo.bitrate);
-
-                if (request.callback) request.callback(connectionInfo);
-            } else if (connectionInfo && request.canceled) {
-                // connection opened, but this connect sequence was canceled
-                // we will disconnect without triggering any callbacks
-                console.log('SERIAL: Connection opened with ID: ' + connectionInfo.connectionId + ', but request was canceled, disconnecting');
-
-                // some bluetooth dongles/dongle drivers really doesn't like to be closed instantly, adding a small delay
-                //setTimeout(function initialization() {
-                //chrome.serial.disconnect(connectionInfo.connectionId, function (result) {
-                // TODO maybe we should do something?
-                //  });
-                //}, 150);
+                        // some bluetooth dongles/dongle drivers really doesn't like to be closed instantly, adding a small delay
+                        //setTimeout(function initialization() {
+                        //chrome.serial.disconnect(connectionInfo.connectionId, function (result) {
+                        // TODO maybe we should do something?
+                        //  });
+                        //}, 150);
+                    }
+                }, function error(message) {
+                    console.log("Error: " + message);
+                    if (request.canceled) {
+                        // connection didn't open and sequence was canceled, so we will do nothing
+                        console.log('SERIAL: Connection didn\'t open and request was canceled');
+                        // TODO maybe we should do something?
+                    } else {
+                        // connection didn't open and request was not canceled
+                        console.log('SERIAL: Failed to open serial port');
+                        if (request.callback) request.callback(false);
+                    }
+                });
+                // Android
+            },
+            function error(message) {
+                alert(message);
             }
-        }, function error(message) {
-            console.log("Error: " + message);
-            if (request.canceled) {
-                // connection didn't open and sequence was canceled, so we will do nothing
-                console.log('SERIAL: Connection didn\'t open and request was canceled');
-                // TODO maybe we should do something?
-            } else {
-                // connection didn't open and request was not canceled
-                console.log('SERIAL: Failed to open serial port');
-                if (request.callback) request.callback(false);
-            }
-        });
-        // Android
+        );
+
+
+
     },
     disconnect: function(callback) {
         var self = this;

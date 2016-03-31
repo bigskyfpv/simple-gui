@@ -113,7 +113,9 @@
 	       <td><input type="tel" data-min="0" data-max="60" data-step="1" data-precision="0" /></td>
             </tr>
         </table>
-        <div class="general_settings" style="margin-top:10px; width:100%">KISS FC Version: <span  id="version"></span> | S/N: <textarea id="SN" rows="1" cols="30" style="overflow:hidden;resize:none;margin-top:10px;line-height:11px;background:none;color:#FFF;"></textarea><br /><br /><span style="cursor:pointer; display:none;" id="SAC">show advanced configuration</span></div>
+        <div class="general_settings" style="margin-top:10px; width:100%">KISS FC Version: <span  id="version"></span> | S/N: <textarea id="SN" rows="1" cols="30" style="overflow:hidden;resize:none;line-height:20px;background:none;color:#FFF;position:relative;top:6px"></textarea>
+        
+        <br /><br /><a class="button" id="SAC" style="display:none" href="#">show advanced configuration</a></div>
     </div> 
     
     <div class="configuration" id="AC" style="width:100%;display: none; clear:both; color:#FFF;">
@@ -210,12 +212,12 @@
             <dt title="the maximum throttle for the motors">Max. Throttle</dt><dd><input type="tel" name="maxThrottle" data-step="1" data-min="0" data-max="2200" /></dd>
             <dt title="the throttle value where the PID controller starts acting">Min. Command</dt><dd><input type="tel" name="minCommand" data-step="1" data-min="0" data-max="2200" /></dd>
             <dt title="the ESC's middle command for 3D mode use">Mid. Command</dt><dd><input type="tel" name="midCommand" data-step="1" data-min="0" data-max="2200" /></dd>
-	  <dt>Tri Yaw Mid.</dt><dd><input type="tel" name="TYmid" data-step="1" data-min="0" data-max="2200" /></dd>
-	  <dt>Tri Yaw Invert</dt><dd><input type="checkbox" name="TYinv" /></dd>
-            <dt>OneShot 125</dt><dd><input type="checkbox" name="oneShot" /></dd>
-	  <dt>OneShot 42</dt><dd><input type="checkbox" name="oneShot42" /></dd>
-            <dt>3D Mode</dt><dd><input type="checkbox" disabled="true" name="3dMode"/></dd>
-	  <dt><span style="font-size:11px;"  title="activate if you have mounted your FC 180 deg rotated">FC Rotated by 180&deg;</span></dt><dd><input disabled="true" type="checkbox" name="orientation"/></dd>
+	  		<dt>Tri Yaw Mid.</dt><dd><input type="tel" name="TYmid" data-step="1" data-min="0" data-max="2200" /></dd>
+	  		<dt>Tri Yaw Invert</dt><dd><input type="checkbox" name="TYinv" /></dd>
+      		<dt>OneShot 125</dt><dd><input type="checkbox" name="oneShot" /></dd>
+	  		<dt>OneShot 42</dt><dd><input type="checkbox" name="oneShot42" /></dd>
+      		<dt>3D Mode</dt><dd><input type="checkbox" disabled="true" name="3dMode"/></dd>
+	  		<dt><span style="font-size:11px;"  title="activate if you have mounted your FC 180 deg rotated">FC Rotated by 180&deg;</span></dt><dd><input disabled="true" type="checkbox" name="orientation"/></dd>
         </dl>
     </div>
       <div class="clear-both"></div>

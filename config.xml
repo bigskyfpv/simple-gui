@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.anuta.kiss" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Simple GUI</name>
+<widget id="org.anuta.kiss" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>KISS GUI</name>
     <description>
 	The Kiss flight controller configurator for Android. Based on original Felix/Flyduino code of the Chrome app.
     </description>

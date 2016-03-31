@@ -126,7 +126,7 @@ CONTENT.data_output.initialize = function(callback) {
 
             var useGraphData = parseInt($('select[name="graphTitle"]').val());
 
-            if (data && (data['ESC_Telemetrie0'][1] != 0 || data['ESC_Telemetrie0'][0] != 0) && !self.ESCTelemetry) {
+            if ( /*data && (data['ESC_Telemetrie0'][1] != 0 || data['ESC_Telemetrie0'][0] != 0) &&*/ !self.ESCTelemetry) {
                 self.ESCTelemetry = 1;
                 $('select[name="graphTitle"]').html('<option value="0">Gyro &amp; ACC Datas:</option><option value="1">ESC Temperatures:</option><option id="ESCTelemetrie" value="2">ESC Voltanges:</option><option value="3">ESC Currents:</option><option value="4">ESC used A/h</option><option value="5">ESC E-RpM / 1000</option><option value="6">ESC TLM Stats</option>');
             }
@@ -208,6 +208,18 @@ CONTENT.data_output.initialize = function(callback) {
                     for (var i = 0; i < 3; i++) {
                         sampleBlock.push(data['GyroRaw'][i] * 4); // to have it more visible
                         sampleBlock.push(data['ACCRaw'][i]);
+                        if (i == 0) {
+                            if (data['GyroRaw'][i] * 2000 > parseInt($('#gxmax').text())) $('#gxmax').text(data['GyroRaw'][i] * 2000);
+                            if (data['GyroRaw'][i] * 2000 < parseInt($('#gxmin').text())) $('#gxmin').text(data['GyroRaw'][i] * 2000);
+                        }
+                        if (i == 1) {
+                            if (data['GyroRaw'][i] * 2000 > parseInt($('#gymax').text())) $('#gymax').text(data['GyroRaw'][i] * 2000);
+                            if (data['GyroRaw'][i] * 2000 < parseInt($('#gymin').text())) $('#gymin').text(data['GyroRaw'][i] * 2000);
+                        }
+                        if (i == 2) {
+                            if (data['GyroRaw'][i] * 2000 > parseInt($('#gzmax').text())) $('#gzmax').text(data['GyroRaw'][i] * 2000);
+                            if (data['GyroRaw'][i] * 2000 < parseInt($('#gzmin').text())) $('#gzmin').text(data['GyroRaw'][i] * 2000);
+                        }
                     }
 
                     break;
@@ -462,7 +474,7 @@ CONTENT.data_output.drawGraph = function(graph, scale) {
 
 CONTENT.data_output.resizeCanvas = function() {
     var wrapper = $('#content');
-    $('#graph').prop('width', wrapper.width() - 160); // -160px for legend
+    $('#graph').prop('width', wrapper.width() - 170); // -160px for legend
 
     CONTENT.data_output.renderGraph();
 }

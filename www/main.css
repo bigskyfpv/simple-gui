@@ -76,3 +76,17 @@ input[type="tel"]::-webkit-inner-spin-button {
 #content {} #port {
     display: none;
 }
+a.button {
+    margin: 0 0 0 5px;
+    height: 20px;
+    line-height: 20px;
+    padding: 4px 10px 4px 10px;
+    text-align: center;
+    background-color: #d01414;
+    font-size: 12px;
+    height: 20px;
+    color: white;
+}
+a.button:hover {
+    background-color: #d01414;
+}

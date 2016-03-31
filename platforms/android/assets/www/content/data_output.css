@@ -13,6 +13,9 @@
 .data_output .other {
     width: 100%;
 }
+.data_output .limits {
+    width: 100%;
+}
 .data_output .other dl {} .data_output .other dl dt {
     float: left;
     width: 50px;
@@ -23,18 +26,6 @@
     margin-left: 55px;
     line-height: 20px;
     font-weight: bold;
-}
-.data_output .other a {
-    margin: 10px 0 0 0;
-    display: block;
-    color: white;
-    padding: 0 10px 0 10px;
-    height: 20px;
-    line-height: 20px;
-    background-color: #830a0a;
-}
-.data_output .other a:hover {
-    background-color: #d01414;
 }
 .data_output .bars {
     float: left;
@@ -122,4 +113,7 @@
 .data_output #graph {
     float: right;
     background-color: white;
+}
+.data_output .legend {
+    padding-right: 10px;
 }
