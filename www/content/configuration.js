@@ -36,7 +36,7 @@ CONTENT.configuration.initialize = function(callback) {
         } else {
             $('#version').text((data['ver'] / 100));
             $('input[name="3dMode"]').removeAttr("disabled");
-            $('input[name="orientation"]').removeAttr("disabled");
+            $('select[name="BoardRotation"]').removeAttr("disabled");
         }
 
         if (data['ver'] > 101) {
@@ -133,8 +133,8 @@ CONTENT.configuration.initialize = function(callback) {
             contentChange();
         });
         $('input[name="oneShot"]').prop('checked', data['ESConeshot125']);
-        $('input[name="orientation"]').prop('checked', data['ori180deg']);
-        $('input[name="orientation"]').on('click', function() {
+        $('select[name="BoardRotation"]').val(data['BoardRotation']);
+        $('select[name="BoardRotation"]').on('change', function() {
             contentChange();
         });
 
@@ -332,7 +332,7 @@ CONTENT.configuration.initialize = function(callback) {
             data['Active3DMode'] = parseInt($('input[name="3dMode"]').prop('checked') ? 1 : 0);
             data['Active3DMode'] = parseInt($('input[name="3dMode"]').prop('checked') ? 1 : 0);
             data['failsaveseconds'] = parseInt($('input[name="failsaveseconds"]').val());
-            data['ori180deg'] = parseInt($('input[name="orientation"]').prop('checked') ? 1 : 0);
+            data['BoardRotation'] = parseInt($('select[name="BoardRotation"]').val());
 
             // pid and rates
             // roll
@@ -420,10 +420,10 @@ CONTENT.configuration.initialize = function(callback) {
                 var userPIDselect = $('#userSel');
                 for (var i = 1; i < self.USER_PIDs.length; i++) {
                     var newSetName = String(self.USER_PIDs[i].name);
-                    newSetName = newSetName.replace(/²/g, ':');
-                    newSetName = newSetName.replace(/³/g, '[');
-                    newSetName = newSetName.replace(/°/g, ']');
-                    newSetName = newSetName.replace(/§/g, ',');
+                    newSetName = newSetName.replace(/ï¿½/g, ':');
+                    newSetName = newSetName.replace(/ï¿½/g, '[');
+                    newSetName = newSetName.replace(/ï¿½/g, ']');
+                    newSetName = newSetName.replace(/ï¿½/g, ',');
                     userPIDselect.append('<option value="' + i + '">' + newSetName + '</option>');
                 }
             },
